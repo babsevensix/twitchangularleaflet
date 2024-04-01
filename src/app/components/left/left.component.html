@@ -1,0 +1,4 @@
+<input [(ngModel)]="textSearch" class="mt-3" type="text" placeholder="Cerca l' indirizzo">
+
+<button [disabled]="textSearch.length === 0"
+    (click)="onSearchAddress()">Cerca</button>

@@ -1,0 +1,5 @@
+:host{
+    @apply w-full h-full absolute flex flex-col md:grid md:grid-cols-[200px_1fr] md:grid-rows-[100px_1fr_50px] ;
+    // grid-template-columns: 200px 1fr;
+    // grid-template-rows: 100px 1fr 200px;
+}
