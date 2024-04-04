@@ -1,5 +1,6 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, inject } from '@angular/core';
 import L from 'leaflet';
+import { AddressService } from '../services/address.service';
 
 @Directive({
   selector: '[appLeaflet]',
@@ -8,13 +9,14 @@ import L from 'leaflet';
 export class LeafletDirective {
 
 
+  private addressService = inject(AddressService);
+
   @Input() set centerToMap(value:{lat: number, lng:number} | undefined){
     if (value){
       this.map.flyTo({...value}, 15);
 
-      this.layerMarkerGroup.clearLayers();
-
-      L.marker({...value}).addTo(this.layerMarkerGroup);
+      this.creaMarkers();
+      
     }
   };
 
@@ -33,6 +35,16 @@ export class LeafletDirective {
     this.layerMarkerGroup = L.layerGroup();
     this.layerMarkerGroup.addTo(this.map);
 
+  }
+
+  private creaMarkers(): void{
+    this.layerMarkerGroup.clearLayers();
+
+    this.addressService.listaIndirizziRicercati.forEach(ir=>{
+      L.marker({...ir}).addTo(this.layerMarkerGroup);
+    })
+
+    
   }
 
 }

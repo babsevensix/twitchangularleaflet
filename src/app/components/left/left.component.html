@@ -1,4 +1,17 @@
-<input [(ngModel)]="textSearch" class="mt-3" type="text" placeholder="Cerca l' indirizzo">
+<input [(ngModel)]="addressService.indirizzoDiRicerca" class="mt-3" type="text" placeholder="Cerca l' indirizzo">
 
-<button [disabled]="textSearch.length === 0"
+<div class="flex flex-row gap-3">
+<button [disabled]="addressService.indirizzoDiRicerca.length === 0"
     (click)="onSearchAddress()">Cerca</button>
+<button  [disabled]="addressService.listaIndirizziRicercati.length === 0"
+    (click)="onClearMarker()">Pulisci Marker</button>
+</div>
+
+
+<ul>
+   @for (indirizzo of addressService.listaIndirizziRicercati; track $index) {
+    <li>
+        {{indirizzo.label}}
+    </li>
+   }
+</ul>
